@@ -19,23 +19,32 @@ print(soup.title.name)
 print(soup.title.string)
 # beginning navigation:
 print(soup.title.parent.name)
-# getting specific values:
-print(soup.p)
 
 #finding and storing all the a tags
 directoriess = soup.findAll("a")
+
 #setting no value
 directories = ""
+#social media accounts
+socialmedia = ""
 
 for directory in directoriess:
     d = directory["href"]
-    directories = directories + d
-
-print(directories)
-
-    
+    if(directories.find(d) == -1):
+        if "http" in d:
+            directories = directories + d + "\n"
+            if "facebook" in d:
+                socialmedia = socialmedia + d + "\n"
+            if "twitter" in d:
+                socialmedia = socialmedia + d + "\n"
+            if "youtube" in d:
+                socialmedia = socialmedia + d + "\n"
+            if "insta" in d:
+                socialmedia = socialmedia + d + "\n"
+            if "github" in d:
+                socialmedia = socialmedia + d + "\n"
             
-    
-
-
-
+   
+print(directories)
+print(socialmedia)
+directories = directories.split("\n")
