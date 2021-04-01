@@ -34,7 +34,6 @@ class parentdir:
             #finding links in a tags
             if(self.links.find(d) == -1 & self.directories.find(d) == -1):
                 #vilidating links
-                #match= re.search("\\\w+",d)
                 if "http" in d:
                     #seperating social media sites
                     sites = ('facebook','twitter','youtube','insta','github')
@@ -52,9 +51,10 @@ class parentdir:
         fsub.close()
     
     def screenshot(self):
+        #assigning file name
         for i in range (0,4):
             name = "screen"+str(i)+".png"
-        #PATH='/usr/bin'
+        #taking screenshot
         driver = webdriver.Firefox()
         driver.get(self.url)
         driver.save_screenshot_as_file(name)
@@ -105,6 +105,7 @@ class parentdir:
             i=0
             i=int(i)
             for d in self.directory:
+                #printing names of directories
                 print(i+1 ,self.directory[i][1 : len(self.directory[i])])
                 i=i+1
             print("press 0 to exit")
@@ -116,21 +117,28 @@ class parentdir:
                 #transfering html to soup
                 self.soup = bs(r.text, "html.parser")
                 #print(self.soup)
-                self.findinglinks()
                 self.output()
     
     def giveback(self):
+        #converting directories to list
         self.directories = self.directories.split("\n")
+        #returning directories
         return self.directories
 
 
 #main code
 url= input("enter url ")
+#calling the url
 par = parentdir(url)
 par.callurl()
 par.output()
+#taking values of directories
 give = par.giveback()
-#print(give)
-#print(len(give))
-direc = parentdir(url,give)
-direc.finddir()
+
+depth = 0
+depth = input("depth = ")
+
+for i in range(int(depth)):
+    direc = parentdir(url,give)
+    direc.finddir()
+    give = direc.giveback()
