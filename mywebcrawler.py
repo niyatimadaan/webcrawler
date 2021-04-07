@@ -57,14 +57,46 @@ class parentdir:
         #taking screenshot
         driver = webdriver.Firefox()
         driver.get(self.url)
-        driver.save_screenshot_as_file(name)
+        driver.get_screenshot_as_file(name)
         driver.close()
+
+    def saveimage(self):
+        d=self.soup.findAll("img")
+        img =""
+        count =0
+        for e in d:
+            k= e.get('src')    
+            if re.search("^(\/\/)\w", k): 
+                print(k)
+                img = img + k +"\n"
+                count = count +1
+            elif re.search("http",k):
+                print(k)
+                img = img + k +"\n"
+                count = count +1
+        if count == 0:
+            print("none found")
+        img = img.split("\n")
+
+        for i in range(count):
+            print()
+            no=input("enter number below " + str(count) +" to exit enter any other no ")
+            no= int(no)
+            if no > count:
+                break
+            if re.search("^(\/\/)\w", img[no] ):
+                r= requests.get( 'https:' + str(img[no]))
+            else:
+                r= requests.get(str(img[no]))
+            name = "image"+str(i)+".png"
+            with open (name,'wb') as f:
+                f.write(r.content)
 
     def output(self):
         self.findinglinks()
-        for x in range(0, 4):
-            print("press 1: about site \n press 2: links \n press 3: screenshot")
-            print(" press 4: directories \n press 5: social media \n press any other key to exit ")
+        for x in range(0, 6):
+            print(" press 1: about site \n press 2: links \n press 3: screenshot")
+            print(" press 4: directories \n press 5: social media \n press 6: saving image \n press any other key to exit ")
             num = input("enter number ")
             num = int(num)
             if num == 1:
@@ -97,6 +129,8 @@ class parentdir:
                     print(self.socialmedia)
                 else:
                     print("none found")
+            elif num ==6:
+                self.saveimage()
             else:
                 break
 
@@ -135,10 +169,12 @@ par.output()
 #taking values of directories
 give = par.giveback()
 
-depth = 0
-depth = input("depth = ")
+if len(give) == 0: 
+    depth = 0
+    depth = input("depth = ")
 
-for i in range(int(depth)):
-    direc = parentdir(url,give)
-    direc.finddir()
-    give = direc.giveback()
+    for i in range(int(depth)):
+        direc = parentdir(url,give)
+        direc.finddir()
+        give = direc.giveback()
+        
