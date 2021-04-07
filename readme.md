@@ -6,7 +6,7 @@ A class parentdir is defined. It takes input of url and directory if available.
 The function callurl downloads html source code of website input.
 The function findinglinks finds the links present in source code. It then sorts them into external links, social media links and directories.
 
- 
+<img src="images/links.png" height="500">
 
 Links from the site
 
