@@ -12,13 +12,13 @@ Links from the site
 
 The function screenshot takes the screenshot of the provided site using selenium.
 
-
+<img src="images/screen1.png" height="500">
 
 The screenshot of the site
 
-
 The function saveimage saves images from the site in a folder.
 
+<img src="images/image0.png" height="400">
 
 An image saved from the site
 
@@ -33,7 +33,7 @@ A variable of class parentdir is created.
 The functions callurl followed by output are called.
 The outputs are provided as per user's requests which include description, links, directories, screenshot, images and social media handles.
 
-
+<img src="images/output.png" height="200">
 
 User is asked to enter depth which is the number of times the crawler would enter directories and further directories.
 A for loop is created for range depth.
