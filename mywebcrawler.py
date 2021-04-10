@@ -103,6 +103,7 @@ class parentdir:
                 f.write(r.content)
     
     def contact(self):
+        fsub = open("contact.txt" , "w")
         email = re.findall("([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", str(self.soup))
         phone = re.findall("(\d{3}[-\.\s]?\d{3}[-\.\s]?\d{4}[-\.\s]?)", str(self.soup.get_text()))
         if (email==[]):
@@ -110,6 +111,8 @@ class parentdir:
         if (phone==[]):
             phone="None found"
         print("emails: \n"+ str(email) + "\nphone number: \n"+str(phone))
+        fsub.write("emails: \n"+ str(email) + "\nphone number: \n"+str(phone))
+        fsub.close()
 
     def output(self):
         self.findinglinks()
