@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 from selenium import webdriver
 import re
+import socket
 
 class parentdir:
     def __init__(self,url,directory = None):
@@ -13,14 +14,23 @@ class parentdir:
     soup=""
     socialmedia=""
     sno=0
+    addr=""
 
     def callurl(self):        
         #downloading html
         r= requests.get(self.url)
         #transfering html to soup
         self.soup = bs(r.text, "html.parser")
-        #print(self.soup)
-
+        #This function checks to see if a host name has a DNS entry by checking
+        #for socket info. If the website gets something in return, 
+        #we know it's available to DNS.
+        try:
+            self.addr = socket.gethostbyname(self.url)
+        except socket.gaierror:
+            return False
+        else:
+            return True
+            
     def findinglinks(self):
         #adding data to file
         fsub = open("directories.txt" , "w")
@@ -91,12 +101,22 @@ class parentdir:
             name = "image"+str(i)+".png"
             with open (name,'wb') as f:
                 f.write(r.content)
+    
+    def contact(self):
+        email = re.findall("([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", str(self.soup))
+        phone = re.findall("(\d{3}[-\.\s]?\d{3}[-\.\s]?\d{4}[-\.\s]?)", str(self.soup.get_text()))
+        if (email==[]):
+            email="None found"
+        if (phone==[]):
+            phone="None found"
+        print("emails: \n"+ str(email) + "\nphone number: \n"+str(phone))
 
     def output(self):
         self.findinglinks()
         for x in range(0, 6):
             print(" press 1: about site \n press 2: links \n press 3: screenshot")
-            print(" press 4: directories \n press 5: social media \n press 6: saving image \n press any other key to exit ")
+            print(" press 4: directories \n press 5: social media \n press 6: saving image")
+            print(" press 7: contacts \n press 8: dns \n press any other key to exit ")
             num = input("enter number ")
             num = int(num)
             if num == 1:
@@ -131,8 +151,23 @@ class parentdir:
                     print("none found")
             elif num ==6:
                 self.saveimage()
+            elif num ==7:
+                self.contact()
+            elif num ==8:
+                print(self.addr)
             else:
                 break
+
+    def dns_info(self):
+        #This function checks to see if a host name has a DNS entry by checking
+        #for socket info. If the website gets something in return, 
+        #we know it's available to DNS.
+        try:
+            socket.gethostbyname(self.url)
+        except socket.gaierror:
+            return False
+        else:
+            return True
 
     def finddir(self):
         for x in range (0, len(self.directory)):              
@@ -151,6 +186,7 @@ class parentdir:
                 #transfering html to soup
                 self.soup = bs(r.text, "html.parser")
                 #print(self.soup)
+                self.dns_info()
                 self.output()
     
     def giveback(self):
@@ -169,7 +205,7 @@ par.output()
 #taking values of directories
 give = par.giveback()
 
-if len(give) == 0: 
+if len(give) != 1: 
     depth = 0
     depth = input("depth = ")
 
@@ -177,4 +213,3 @@ if len(give) == 0:
         direc = parentdir(url,give)
         direc.finddir()
         give = direc.giveback()
-        
