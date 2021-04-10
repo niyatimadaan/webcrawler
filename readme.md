@@ -22,8 +22,10 @@ The function saveimage saves images from the site in a folder.
 
 An image saved from the site
 
+The function contact finds and prints all the emails and phone numbers.
 The function output prints all the values collected by the functions before.
 The function finddir downloads the html souce code of the directory asked.
+The function dns_info provides the information for dns.
 The function giveback returns the directories present.
 
 
