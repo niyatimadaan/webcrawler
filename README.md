@@ -43,6 +43,17 @@ The `ParentDir` class serves as the foundation for the web crawler. It takes two
 5. The crawler will process the site according to your inputs
 6. Review the extracted data and choose another directory to continue crawling if desired
 
+## Screenshots
+
+Here are some screenshots of the project in action:
+
+<img src="images/links.png" alt="Links from the site" height="500">
+<img src="images/screen1.png" alt="Screenshot of the site" height="500">
+<img src="images/image0.png" alt="An image saved from the site" height="400">
+<img src="images/output.png" alt="User output" height="200">
+
+These images demonstrate the key features of the web crawler, including link extraction, screenshot capture, image saving, and the final output display. They provide visual representations of the project's capabilities and can help users understand how the tool works.
+
 ## Dependencies
 
 - Python
@@ -64,31 +75,6 @@ The `ParentDir` class serves as the foundation for the web crawler. It takes two
 
 Ensure that your system meets the requirements for running Selenium. You may need to install a WebDriver (e.g., ChromeDriver) depending on your operating system and preferred browser.
 
-## Limitations
-
-- May not work correctly with dynamic or heavily JavaScript-dependent sites
-- Could potentially overwhelm servers with excessive requests
-- Not designed for large-scale production use; intended for educational and small-scale projects
-
-## Contributing
-
-Contributions to this project are welcome. Please feel free to submit pull requests or issues.
-
-## License
-
-[Insert license information here]
-
 ## Acknowledgments
 
 This project was inspired by various web scraping tutorials and examples available online. Special thanks to the creators of the libraries used in this project for their contributions to the Python ecosystem.
-
-## Screenshots
-
-Here are some screenshots of the project in action:
-
-<img src="images/links.png" alt="Links from the site" height="500">
-<img src="images/screen1.png" alt="Screenshot of the site" height="500">
-<img src="images/image0.png" alt="An image saved from the site" height="400">
-<img src="images/output.png" alt="User output" height="200">
-
-These images demonstrate the key features of the web crawler, including link extraction, screenshot capture, image saving, and the final output display. They provide visual representations of the project's capabilities and can help users understand how the tool works.
